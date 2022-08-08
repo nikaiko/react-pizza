@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Categories() {
+    const [activeIdx, setActiveIdx] = useState(0);
+
+    const categories = [
+        "Все",
+        "Мясные",
+        "Вегетарианская",
+        "Гриль",
+        "Острые",
+        "Закрытые",
+    ];
+
     return (
-        <div class="categories">
+        <div className="categories">
             <ul>
-                <li class="active">Все</li>
-                <li>Мясные</li>
-                <li>Вегетарианская</li>
-                <li>Гриль</li>
-                <li>Острые</li>
-                <li>Закрытые</li>
+                {categories.map((category, id) => (
+                    <li
+                        key={id}
+                        onClick={() => setActiveIdx(id)}
+                        className={activeIdx === id ? "active" : ""}
+                    >
+                        {category}
+                    </li>
+                ))}
             </ul>
         </div>
     );
