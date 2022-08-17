@@ -7,20 +7,24 @@ import Sort from "../components/Sort";
 const Home = () => {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sortType, setSortType] = useState({});
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://62f0fdfb25d9e8a2e7c33f6e.mockapi.io/pizzas")
       .then((res) => {
         return res.json();
       })
       .then((arr) => {
         setPizzas(arr);
-        setIsLoading(!isLoading);
+        setIsLoading(false);
       });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -31,7 +35,7 @@ const Home = () => {
           ? [...new Array(6)].map((__, id) => <Skeleton key={id} />)
           : pizzas.map((pizza, id) => <PizzaBlock key={id} {...pizza} />)}
       </div>
-    </>
+    </div>
   );
 };
 
